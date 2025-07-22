@@ -1,0 +1,13 @@
+app.post("/api/bugs", async (req, res) => {
+  console.log("Received bug data:", req.body); // Debug line
+
+  try {
+    const newBug = new Bug(req.body);
+    await newBug.save();
+    res.status(201).json(newBug);
+  } catch (err) {
+    console.error("Error saving bug:", err.message); // Debug line
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
